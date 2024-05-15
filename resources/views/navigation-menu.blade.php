@@ -5,11 +5,14 @@
         </div>
         <div class="top-menu ml-10">
             <ul class="flex space-x-4">
-                <x-nav-link href="{{ route('home') }}" :active="request()->routeIs('home')">
+                <x-nav-link wire:navigate href="{{ route('index') }}" :active="request()->routeIs('index')">
                     {{ __('Home') }}
                 </x-nav-link>
-                <x-nav-link href="{{ route('materi') }}" :active="request()->routeIs('materi')">
+                <x-nav-link wire:navigate href="{{ route('materi') }}" :active="request()->routeIs('materi', 'mapel.show', 'materi-show')">
                     {{ __('Materi') }}
+                </x-nav-link>
+                <x-nav-link wire:navigate href="{{ route('tugas') }}" :active="request()->routeIs('tugas')">
+                    {{ __('Tugas') }}
                 </x-nav-link>
             </ul>
         </div>

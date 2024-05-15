@@ -13,8 +13,20 @@ class HomeController extends Controller
      */
     public function __invoke(Request $request)
     {
-        return view('siswa.home', [
-            'mapel' =>Mapel::all(),
+        return view('siswa.index', [
+            'mapel' => Mapel::all(),
+        ]);
+    }
+
+    public function show(Mapel $mapel){
+        $materi = $mapel->mapelMateri; // Asumsikan Anda memiliki relasi `materi` pada model `Mapel`
+
+        return view('siswa.materi', [
+            'materi' => $materi,
+            'mapel' => Mapel::whereHas('mapelMateri', function ($query) {
+                $query->published();
+            })->get(),
+            'selectedMapel' => $mapel
         ]);
     }
 }

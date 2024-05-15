@@ -16,4 +16,10 @@ class MateriController extends Controller
             })->get()
         ]);
     }
+
+    public function show(Materi $materi){
+        return view('siswa.materi-show', [
+            'materi' => $materi
+        ]);
+    }
 }

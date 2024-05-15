@@ -41,6 +41,10 @@ class Materi extends Model
         return $this->belongsToMany(Mapel::class);
     }
 
+    public function comments(){
+        return $this->hasMany(Comment::class);
+    }
+
     public function getExcerpt(){
         return Str::limit(strip_tags($this->body), 100);
     }

@@ -3,6 +3,8 @@
 namespace App\Models;
 
 // use Illuminate\Contracts\Auth\MustVerifyEmail;
+use Filament\Models\Contracts\FilamentUser;
+use Filament\Panel;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
@@ -10,6 +12,7 @@ use Laravel\Fortify\TwoFactorAuthenticatable;
 use Laravel\Jetstream\HasProfilePhoto;
 use Laravel\Sanctum\HasApiTokens;
 
+// class User extends Authenticatable implements FilamentUser
 class User extends Authenticatable
 {
     use HasApiTokens;
@@ -18,6 +21,29 @@ class User extends Authenticatable
     use Notifiable;
     use TwoFactorAuthenticatable;
 
+    const ROLE_ADMIN = 'ADMIN';
+    const ROLE_PENGAJAR = 'PENGAJAR';
+    const ROLE_ORANGTUA = 'ORANGTUA';
+    const ROLE_SISWA = 'ADMIN';
+
+    const ROLES = [
+        self::ROLE_PENGAJAR => 'Pengajar',
+        self::ROLE_ORANGTUA => 'Orangtua',
+        self::ROLE_SISWA => 'Siswa',
+        self::ROLE_ADMIN => 'Admin',
+    ];
+
+    // public function canAccessPanel(Panel $panel): bool{
+    //     return $this->isAdmin() || $this->isPengajar();
+    // }
+
+    // public function isAdmin(){
+    //     $this->role === self::ROLE_ADMIN;
+    // }
+
+    // public function isPengajar(){
+    //     $this->role === self::ROLE_PENGAJAR;
+    // }
     /**
      * The attributes that are mass assignable.
      *
@@ -27,6 +53,7 @@ class User extends Authenticatable
         'name',
         'email',
         'password',
+        'role',
     ];
 
     /**
@@ -49,6 +76,11 @@ class User extends Authenticatable
     protected $appends = [
         'profile_photo_url',
     ];
+
+
+    public function comments(){
+        return $this->hasMany(Comment::class);
+    }
 
     /**
      * Get the attributes that should be cast.

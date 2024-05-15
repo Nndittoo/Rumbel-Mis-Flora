@@ -16,6 +16,9 @@ return new class extends Migration
 
             $table->string('image');
             $table->string('title');
+            $table->string('jadwal');
+            $table->time('kelas_mulai');
+            $table->time('kelas_akhir');
             $table->string('slug')->unique();
             $table->string('text_color')->nullable();
             $table->string('bg_color')->nullable();
