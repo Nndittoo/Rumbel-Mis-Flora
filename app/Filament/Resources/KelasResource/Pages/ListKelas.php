@@ -1,14 +1,14 @@
 <?php
 
-namespace App\Filament\Resources\MapelResource\Pages;
+namespace App\Filament\Resources\KelasResource\Pages;
 
-use App\Filament\Resources\MapelResource;
+use App\Filament\Resources\KelasResource;
 use Filament\Actions;
 use Filament\Resources\Pages\ListRecords;
 
-class ListMapels extends ListRecords
+class ListKelas extends ListRecords
 {
-    protected static string $resource = MapelResource::class;
+    protected static string $resource = KelasResource::class;
 
     protected function getHeaderActions(): array
     {

@@ -23,12 +23,12 @@ class User extends Authenticatable
 
     const ROLE_ADMIN = 'ADMIN';
     const ROLE_PENGAJAR = 'PENGAJAR';
-    const ROLE_ORANGTUA = 'ORANGTUA';
-    const ROLE_SISWA = 'ADMIN';
+    const ROLE_ORTU = 'ORTU';
+    const ROLE_SISWA = 'SISWA';
 
     const ROLES = [
         self::ROLE_PENGAJAR => 'Pengajar',
-        self::ROLE_ORANGTUA => 'Orangtua',
+        self::ROLE_ORTU => 'Orangtua',
         self::ROLE_SISWA => 'Siswa',
         self::ROLE_ADMIN => 'Admin',
     ];
@@ -81,6 +81,18 @@ class User extends Authenticatable
     public function comments(){
         return $this->hasMany(Comment::class);
     }
+
+    public function userPengajar(){
+        return $this->hasOne(Pengajar::class, 'user_id');
+    }
+    public function userSiswa(){
+        return $this->hasOne(Siswa::class, 'user_id');
+    }
+    public function userOrtu(){
+        return $this->hasOne(Ortu::class, 'user_id');
+    }
+
+
 
     /**
      * Get the attributes that should be cast.

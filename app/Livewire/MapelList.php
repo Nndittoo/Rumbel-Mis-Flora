@@ -9,10 +9,6 @@ class MapelList extends Component
 {
     public $mapels;
 
-    public function anjing(){
-        dd("tolol");
-    }
-
     public function mount()
     {
         $this->mapels = Mapel::all();

@@ -1,8 +1,8 @@
 <?php
 
-namespace App\Filament\Resources\MateriResource\Pages;
+namespace App\Filament\Pengajar\Resources\MateriResource\Pages;
 
-use App\Filament\Resources\MateriResource;
+use App\Filament\Pengajar\Resources\MateriResource;
 use Filament\Actions;
 use Filament\Resources\Pages\CreateRecord;
 

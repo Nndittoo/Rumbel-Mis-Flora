@@ -1,14 +1,14 @@
 <?php
 
-namespace App\Filament\Resources\MateriResource\Pages;
+namespace App\Filament\Resources\OrtuResource\Pages;
 
-use App\Filament\Resources\MateriResource;
+use App\Filament\Resources\OrtuResource;
 use Filament\Actions;
 use Filament\Resources\Pages\EditRecord;
 
-class EditMateri extends EditRecord
+class EditOrtu extends EditRecord
 {
-    protected static string $resource = MateriResource::class;
+    protected static string $resource = OrtuResource::class;
 
     protected function getHeaderActions(): array
     {

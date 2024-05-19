@@ -1,8 +1,8 @@
 <?php
 
-namespace App\Filament\Resources\MapelResource\Pages;
+namespace App\Filament\Pengajar\Resources\MapelResource\Pages;
 
-use App\Filament\Resources\MapelResource;
+use App\Filament\Pengajar\Resources\MapelResource;
 use Filament\Actions;
 use Filament\Resources\Pages\EditRecord;
 
@@ -14,8 +14,6 @@ class EditMapel extends EditRecord
     {
         return [
             Actions\DeleteAction::make(),
-            Actions\ForceDeleteAction::make(),
-            Actions\RestoreAction::make(),
         ];
     }
 }
