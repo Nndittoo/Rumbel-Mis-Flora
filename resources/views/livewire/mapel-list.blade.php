@@ -7,14 +7,20 @@
                 <img alt="content" class="object-cover object-center h-full w-full"
                     src="{{ asset("storage/".$mapel->image) }}">
             </div>
-            <div class="flex flex-col gap-2">
-                <a class="text-xl font-medium title-font mt-5">{{ $mapel->title }}</a>
+            <div class="flex flex-col">
+                <div class="flex gap-5 mt-3">
+                    @foreach($mapel->jadwal as $hari)
+                <p class="flex p-2 bg-indigo-500 bg-opacity-50 text-slate-600 font-mono rounded-xl">{{ $hari }}</p>
+                     @endforeach
+                </div>
+                <div class="flex flex-col">
+                    <a class="text-xl font-medium title-font mt-5">{{ $mapel->title }}</a>
                 <a wire:navigate href="{{ route('materi', ['mapel' => $mapel->slug]) }}"
                     class="text-slate-300 bg-indigo-500 text-center items-center p-2 hover:text-slate-50 hover:bg-indigo-700 transition ease-in-out 300ms cursor-pointer rounded-xl">
                     Start Now
                 </a>
+                </div>
             </div>
-            <p class="absolute top-1 right-1 p-3 bg-indigo-700 bg-opacity-70 text-slate-200 font-semibold font-mono rounded-xl">{{ $mapel->jadwal}}</p>
-        </div>
+            </div>
     @endforeach
 </div>

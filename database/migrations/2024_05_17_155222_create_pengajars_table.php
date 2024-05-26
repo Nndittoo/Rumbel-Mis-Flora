@@ -18,6 +18,7 @@ return new class extends Migration
             $table->string('fullname');
             $table->string('tempatLahir');
             $table->date('tanggalLahir');
+            $table->string('noHp');
             $table->text('alamat');
             $table->string('pendidikan');
             $table->string('status')->default('active');

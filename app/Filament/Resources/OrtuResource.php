@@ -6,8 +6,10 @@ use App\Filament\Resources\OrtuResource\Pages;
 use App\Filament\Resources\OrtuResource\RelationManagers;
 use App\Models\Ortu;
 use Filament\Forms;
+use Filament\Forms\Components\DatePicker;
 use Filament\Forms\Components\Select;
 use Filament\Forms\Components\TextInput;
+use Filament\Forms\Components\Wizard;
 use Filament\Forms\Form;
 use Filament\Resources\Resource;
 use Filament\Tables;
@@ -19,33 +21,94 @@ use Illuminate\Database\Eloquent\SoftDeletingScope;
 class OrtuResource extends Resource
 {
     protected static ?string $model = Ortu::class;
-
-    protected static ?string $navigationIcon = 'heroicon-o-rectangle-stack';
+    protected static ?string $navigationGroup = "Users";
+    protected static ?string $navigationLabel = "Orang Tua";
+    protected static ?int $groupSort = 1;
+    protected static ?string $navigationIcon = 'heroicon-o-users';
 
     public static function form(Form $form): Form
+{
+    // Determine if editing an existing record or creating a new one
+    $isEditing = $form->getRecord() !== null;
+
+    // Use different form schemas based on whether editing or creating
+    return $form->schema(
+        $isEditing ? static::editFormSchema() : static::createFormSchema()
+    );
+}
+
+    protected static function createFormSchema(): array
     {
-        return $form
-            ->schema([
-                Select::make('user_id')
-                ->label('Akun')
-                ->relationship('ortuUser', 'name')
-                ->required(),
-                Select::make('ortuSiswa')->label('Anak')
-                ->relationship('ortuSiswa', 'full_name')
-                ->required(),
-                TextInput::make('fullName')
-                ->label('Nama Lengkap')
-                ->required(),
-                TextInput::make('alamat')
-                ->required()
-                ->label('Alamat'),
-                TextInput::make('noHp')
-                ->required()
-                ->label('Nomor Hp')
-                ->tel()
-                ->numeric()
-                ->telRegex('/^[+]*[(]{0,1}[0-9]{1,4}[)]{0,1}[-\s\.\/0-9]*$/'),
-            ]);
+        return [
+            Wizard::make([
+                Wizard\Step::make('Biodata')
+                    ->schema([
+                        TextInput::make('fullName')
+                            ->label('Nama Lengkap')
+                            ->required(),
+                        Select::make('ortuSiswa')
+                            ->required()
+                            ->relationship('ortuSiswa', 'full_name'),
+                        TextInput::make('alamat')
+                            ->label('Alamat')
+                            ->required(),
+                        TextInput::make('noHp')
+                            ->required()
+                            ->tel()
+                            ->numeric(),
+                        Select::make('status')
+                            ->options(Ortu::STAT)
+                            ->required(),
+                        TextInput::make('user_id')
+                            ->label('User ID')
+                            ->hidden(),
+                    ]),
+                Wizard\Step::make('Akun')
+                    ->schema([
+                        TextInput::make('ortuUser.name')
+                            ->label('Username')
+                            ->required()
+                            ->maxLength(255),
+                        TextInput::make('ortuUser.email')
+                            ->email()
+                            ->required()
+                            ->maxLength(255),
+                        TextInput::make('ortuUser.password')
+                            ->password()
+                            ->required()
+                            ->visible()
+                            ->revealable()
+                            ->minLength(8),
+                        TextInput::make('passwordConfirmation')
+                            ->password()
+                            ->revealable()
+                            ->same('ortuUser.password')
+                            ->required(),
+                    ]),
+                ])->columnSpanFull(),
+        ];
+    }
+
+    protected static function editFormSchema(): array
+    {
+        return [
+            TextInput::make('fullName')
+                            ->label('Nama Lengkap')
+                            ->required(),
+                        Select::make('ortuSiswa')
+                            ->required()
+                            ->relationship('ortuSiswa', 'full_name'),
+                        TextInput::make('alamat')
+                            ->label('Alamat')
+                            ->required(),
+                        TextInput::make('noHp')
+                            ->required()
+                            ->tel()
+                            ->numeric(),
+                        Select::make('status')
+                            ->options(['active', 'inactive'])
+                            ->required(),
+        ];
     }
 
     public static function table(Table $table): Table
@@ -62,7 +125,6 @@ class OrtuResource extends Resource
             ])
             ->actions([
                 Tables\Actions\ActionGroup::make([
-                    Tables\Actions\ViewAction::make(),
                     Tables\Actions\EditAction::make(),
                     Tables\Actions\DeleteAction::make(),
                     ])

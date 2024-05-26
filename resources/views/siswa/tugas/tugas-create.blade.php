@@ -43,7 +43,7 @@
                         file:bg-gray-50 file:border-0
                         file:me-4
                         file:py-2 file:px-4
-                        dark:file:bg-neutral-700 dark:file:text-neutral-400">
+                        dark:file:bg-neutral-700 dark:file:text-neutral-400" value="{{ old('file', $tugas->file_path ?? '') }}">
                 </div>
                 <div id="file-previews" class="mt-4">
                     @if (isset($tugas) && $tugas->file_paths)

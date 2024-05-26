@@ -13,10 +13,11 @@ return new class extends Migration
     {
         Schema::create('mapels', function (Blueprint $table) {
             $table->id();
+            $table->foreignId('kelas_id')->constrained('kelas');
 
             $table->string('image');
             $table->string('title');
-            $table->string('jadwal');
+            $table->longText('jadwal');
             $table->time('kelas_mulai');
             $table->time('kelas_akhir');
             $table->string('slug')->unique();

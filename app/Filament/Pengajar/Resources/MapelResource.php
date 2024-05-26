@@ -20,16 +20,19 @@ use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\SoftDeletingScope;
 use Illuminate\Support\Str;
 
+
 class MapelResource extends Resource
 {
     protected static ?string $model = Mapel::class;
+    protected static ?string $navigationGroup = "Modul";
+
     public static function getNavigationBadge(): ?string
+
+
     {
         return static::getModel()::count();
     }
-    
-    protected static ?string $navigationGroup = "Belajar";
-    protected static ?string $navigationIcon = 'heroicon-o-book-open';
+
 
     public static function form(Form $form): Form
     {
@@ -47,17 +50,16 @@ class MapelResource extends Resource
                 $set('slug', Str::slug($state));
             }),
             TextInput::make('slug')->unique(ignoreRecord: true),
-            Select::make('jadwal')->required()->options(Mapel::DAY),
+            Select::make('jadwal')->required()->options(Mapel::DAY)->multiple(),
             TimePicker::make('kelas_mulai')->required(),
             TimePicker::make('kelas_akhir')->required(),
+            Select::make('kelas_id')
+                ->relationship('mapelKelas', 'kelas')
+                ->required(),
             FileUpload::make('image')
             ->nullable()
             ->image()
             ->columnSpanFull(),
-            TextInput::make('text_color')
-            ->nullable(),
-            TextInput::make('bg_color')->nullable(),
-
         ]);
     }
 
@@ -67,12 +69,10 @@ class MapelResource extends Resource
         ->columns([
             ImageColumn::make('image'),
             TextColumn::make('title')->label(('Nama Mata Pelajaran'))->searchable()->sortable(),
-            TextColumn::make('slug')->searchable()->sortable(),
+            TextColumn::make('mapelKelas.kelas')->sortable()->label('Kelas'),
             TextColumn::make('jadwal'),
             TextColumn::make('kelas_mulai')->sortable(),
             TextColumn::make('kelas_akhir')->sortable(),
-            TextColumn::make('text_color')->sortable(),
-            TextColumn::make('bg_color')->sortable(),
         ])
             ->filters([
                 //

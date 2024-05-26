@@ -18,6 +18,7 @@ return new class extends Migration
             $table->string('fullName');
             $table->text('alamat');
             $table->text('noHp');
+            $table->string('status');
             $table->timestamps();
         });
     }

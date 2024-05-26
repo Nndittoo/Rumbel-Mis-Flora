@@ -6,8 +6,11 @@ use App\Filament\Resources\SiswaResource\Pages;
 use App\Filament\Resources\SiswaResource\RelationManagers;
 use App\Models\Siswa;
 use Filament\Forms;
+use Filament\Forms\Components\Card;
+use Filament\Forms\Components\DatePicker;
 use Filament\Forms\Components\Select;
 use Filament\Forms\Components\TextInput;
+use Filament\Forms\Components\Wizard;
 use Filament\Forms\Form;
 use Filament\Resources\Resource;
 use Filament\Tables;
@@ -22,47 +25,100 @@ class SiswaResource extends Resource
     protected static ?string $model = Siswa::class;
     protected static ?string $navigationGroup = "Users";
 
-    protected static ?string $navigationIcon = 'heroicon-o-rectangle-stack';
+    protected static ?string $navigationLabel = "Siswa";
 
     public static function form(Form $form): Form
+{
+    // Determine if editing an existing record or creating a new one
+    $isEditing = $form->getRecord() !== null;
+
+    // Use different form schemas based on whether editing or creating
+    return $form->schema(
+        $isEditing ? static::editFormSchema() : static::createFormSchema()
+    );
+}
+    protected static ?string $navigationIcon = 'heroicon-o-user';
+
+    protected static function createFormSchema(): array
     {
-        return $form
-            ->schema([
-                Select::make('user_id')
-                ->label('Akun')
-                ->relationship('siswaUser', 'name')
-                ->required(),
-                TextInput::make('full_name')
-                ->label('Nama Lengkap')
-                ->required(),
-                TextInput::make('alamat')
-                ->required()
-                ->label('Alamat'),
-                TextInput::make('sekolah')
-                ->required()
-                ->label('Asal Sekolah'),
-                Select::make('kelas_id')
-                ->label('Kelas')
-                ->required()
-                ->relationship('siswaKelas', 'kelas'),
-            ]);
+        return [
+            Card::make('Tambah Siswa Baru')
+                    ->schema([
+                        TextInput::make('full_name')
+                            ->label('Nama Lengkap')
+                            ->required(),
+                        TextInput::make('sekolah')
+                            ->label('Asal Sekolah')
+                            ->required(),
+                        Select::make('kelas_id')
+                            ->relationship('siswaKelas', 'kelas')
+                            ->required(),
+                        TextInput::make('alamat')
+                            ->label('Alamat')
+                            ->required(),
+                        TextInput::make('tempatLahir')
+                            ->label('Tempat Lahir')
+                            ->required(),
+                        DatePicker::make('tanggalLahir')
+                            ->label('Tanggal Lahir')
+                            ->date()
+                            ->required(),
+                        Select::make('status')
+                            ->options(Siswa::STAT)
+                            ->required(),
+                        TextInput::make('user_id')
+                            ->label('User ID')
+                            ->hidden(),
+                    ])->columnSpanFull(),
+                ];
     }
 
+    protected static function editFormSchema(): array
+    {
+        return [
+            TextInput::make('full_name')
+            ->label('Nama Lengkap')
+            ->required(),
+            TextInput::make('sekolah')
+                ->label('Asal Sekolah')
+                ->required(),
+            Select::make('kelas_id')
+                ->relationship('siswaKelas', 'kelas')
+                ->required(),
+            TextInput::make('alamat')
+                ->label('Alamat')
+                ->required(),
+            TextInput::make('tempatLahir')
+                ->label('Tempat Lahir')
+                ->required(),
+            DatePicker::make('tanggalLahir')
+                ->label('Tanggal Lahir')
+                ->date()
+                ->required(),
+            Select::make('status')
+                ->options(Siswa::STAT)
+                ->required(),
+        ];
+    }
     public static function table(Table $table): Table
     {
         return $table
             ->columns([
                 TextColumn::make('full_name')->searchable()->sortable()->label('Nama Lengkap'),
+                TextColumn::make('siswaOrtu.fullName')->searchable()->label('Orang Tua'),
                 TextColumn::make('alamat')->searchable()->sortable(),
                 TextColumn::make('siswaKelas.kelas')->sortable()->label('Kelas'),
-                TextColumn::make('siswaOrtu.fullName')->searchable()->label('Orang Tua'),
                 TextColumn::make('sekolah')->searchable()->label('Asal Sekolah'),
+                TextColumn::make('status')->label('Status')
             ])
             ->filters([
                 //
             ])
             ->actions([
-                Tables\Actions\EditAction::make(),
+                Tables\Actions\ActionGroup::make([
+                    Tables\Actions\EditAction::make(),
+                    Tables\Actions\DeleteAction::make(),
+                    ])
             ])
             ->bulkActions([
                 Tables\Actions\BulkActionGroup::make([

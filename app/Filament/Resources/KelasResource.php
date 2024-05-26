@@ -19,7 +19,8 @@ class KelasResource extends Resource
 {
     protected static ?string $model = Kelas::class;
 
-    protected static ?string $navigationIcon = 'heroicon-o-rectangle-stack';
+    protected static ?string $navigationGroup = "Setting";
+    protected static ?string $navigationIcon = 'heroicon-o-calendar';
 
     public static function form(Form $form): Form
     {
@@ -36,7 +37,7 @@ class KelasResource extends Resource
     {
         return $table
             ->columns([
-                TextColumn::make('kelas'),
+                TextColumn::make('kelas')->sortable()->searchable(),
             ])
             ->filters([
                 //

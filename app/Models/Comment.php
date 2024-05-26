@@ -22,4 +22,9 @@ class Comment extends Model
     public function commentMateri(){
         return $this->belongsTo(Materi::class, 'materi_id');
     }
+
+    public function replies()
+    {
+        return $this->hasMany(Reply::class);
+    }
 }

@@ -45,8 +45,10 @@ class TugasController extends Controller
 
     public function show(Tugas $tugas)
     {
+        $balasan = $tugas->tugasBalas;
         return view('siswa.tugas.tugas-show', [
             'tugas' => $tugas,
+            'balasan' => $balasan
         ]);
     }
 

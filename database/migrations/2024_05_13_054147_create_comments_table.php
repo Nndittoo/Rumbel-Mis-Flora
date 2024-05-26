@@ -18,6 +18,14 @@ return new class extends Migration
             $table->string('comment');
             $table->timestamps();
         });
+
+        Schema::create('replies', function (Blueprint $table) {
+            $table->id();
+            $table->text('reply');
+            $table->foreignId('comment_id')->constrained()->onDelete('cascade');
+            $table->foreignId('user_id')->constrained()->onDelete('cascade');
+            $table->timestamps();
+        });
     }
 
     /**
@@ -26,5 +34,6 @@ return new class extends Migration
     public function down(): void
     {
         Schema::dropIfExists('comments');
-    }
+        Schema::dropIfExists('replies');
+}
 };

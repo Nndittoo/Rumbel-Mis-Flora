@@ -17,6 +17,7 @@ return new class extends Migration
             $table->foreignId('mapel_id')->constrained('mapels');
 
             $table->string('title');
+            $table->string('status')->default('BELUM SELESAI');
             $table->text('description');
             $table->text('file_path');
             $table->timestamp('deadline');

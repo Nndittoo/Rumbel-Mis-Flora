@@ -9,4 +9,5 @@ use Filament\Resources\Pages\CreateRecord;
 class CreateMapel extends CreateRecord
 {
     protected static string $resource = MapelResource::class;
+
 }

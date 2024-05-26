@@ -23,6 +23,7 @@ class Pengajar extends Model
         'name',
         'password',
         'role',
+        'noHp',
         'fullname',
         'tempatLahir',
         'tanggalLahir',
@@ -35,6 +36,9 @@ class Pengajar extends Model
         return $this->belongsTo(User::class, 'user_id');
     }
 
+    public function pengajarGaji(){
+        return $this->hasMany(Salary::class, 'pengajar_id');
+    }
         public static function store(array $data)
     {
         // Simpan pengajar menggunakan data yang diterima

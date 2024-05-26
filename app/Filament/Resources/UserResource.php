@@ -23,9 +23,14 @@ use Illuminate\Database\Eloquent\SoftDeletingScope;
 class UserResource extends Resource
 {
     protected static ?string $model = User::class;
-    protected static ?string $navigationLabel = "User";
-    protected static ?string $navigationGroup = "Akun";
-    protected static ?string $navigationIcon = 'heroicon-o-user';
+    protected static ?string $navigationLabel = "Permissions";
+    protected static ?string $navigationGroup = "Setting";
+    protected static ?string $navigationIcon = 'heroicon-o-cog-6-tooth';
+
+    public static function getTitle(): string
+    {
+        return 'Permissions';
+    }
 
     public static function form(Form $form): Form
     {
@@ -40,16 +45,6 @@ class UserResource extends Resource
                     ->unique(ignoreRecord: true)
                     ->required()
                     ->maxLength(255),
-                TextInput::make('password')
-                    ->password()
-                    ->required()
-                    ->visible()
-                    ->revealable()
-                    ->minLength(8),
-                TextInput::make('new_password_confirmation')
-                    ->password()
-                    ->same('password')
-                    ->requiredWith('new_password'),
                 Select::make('role')
                     ->required()
                     ->options(User::ROLES),
@@ -73,7 +68,6 @@ class UserResource extends Resource
             ])
             ->actions([
                 Tables\Actions\ActionGroup::make([
-                    Tables\Actions\ViewAction::make(),
                     Tables\Actions\EditAction::make(),
                     Tables\Actions\DeleteAction::make(),
                     ])

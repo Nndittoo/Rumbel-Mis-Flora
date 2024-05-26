@@ -37,6 +37,9 @@ class Materi extends Model
     public function author(){
         return $this->belongsTo(User::class, 'user_id');
     }
+    public function materiNilai(){
+        return $this->belongsToMany(Nilai::class);
+    }
     public function materiMapel(){
         return $this->belongsToMany(Mapel::class);
     }

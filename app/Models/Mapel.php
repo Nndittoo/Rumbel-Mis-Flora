@@ -36,7 +36,16 @@ class Mapel extends Model
         'kelas_akhir',
         'text_color',
         'bg_color',
+        'kelas_id'
     ];
+
+    protected $casts = [
+        'jadwal' => 'array', // Pastikan kolom 'jadwal' dicasting sebagai array
+    ];
+
+    public function mapelKelas(){
+        return $this->belongsTo(Kelas::class, 'kelas_id');
+    }
 
     public function mapelMateri(){
         return $this->belongsToMany(Materi::class);

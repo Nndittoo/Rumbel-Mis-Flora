@@ -20,14 +20,17 @@ use Illuminate\View\Middleware\ShareErrorsFromSession;
 
 class PengajarPanelProvider extends PanelProvider
 {
+    public static $icon = null;
     public function panel(Panel $panel): Panel
     {
         return $panel
             ->id('pengajar')
             ->path('pengajar')
             ->topNavigation()
+            ->font('Poppins')
+            ->brandName('Rumbel Mis Flora')
             ->colors([
-                'primary' => Color::Cyan,
+                'primary' => '#8A2BE2',
             ])
             ->discoverResources(in: app_path('Filament/Pengajar/Resources'), for: 'App\\Filament\\Pengajar\\Resources')
             ->discoverPages(in: app_path('Filament/Pengajar/Pages'), for: 'App\\Filament\\Pengajar\\Pages')

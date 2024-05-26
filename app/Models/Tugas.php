@@ -7,6 +7,13 @@ use Illuminate\Database\Eloquent\Model;
 
 class Tugas extends Model
 {
+    const SELESAI = 'SELESAI';
+    const BELUM_SELESAI = 'BELUM SELESAI';
+    const JAWAB = [
+        self::SELESAI => 'Selesai',
+        self::BELUM_SELESAI => 'Belum Selesai',
+    ];
+
     use HasFactory;
 
     protected $fillable = [
@@ -16,6 +23,7 @@ class Tugas extends Model
         'description',
         'file_path',
         'original_filename',
+        'status',
         'deadline'
     ];
 
@@ -25,9 +33,20 @@ class Tugas extends Model
     ];
 
     public function tugasMapel(){
-        return $this->belongsTo(Mapel::class);
+        return $this->belongsTo(Mapel::class, 'mapel_id');
     }
     public function tugasUser(){
-        return $this->belongsTo(User::class);
+        return $this->belongsTo(User::class, 'user_id');
     }
+
+    public function tugasBalas()
+    {
+        return $this->hasMany(BalasTugas::class);
+    }
+
+    public function hasBalasan()
+{
+    return $this->tugasBalas()->exists();
+}
+
 }

@@ -29,4 +29,10 @@ class CreatePengajar extends CreateRecord
 
         return $data;
     }
+
+    protected function beforeCreate(): void
+    {
+        // Ensure all wizard steps are validated
+        $this->form->validate();
+    }
 }

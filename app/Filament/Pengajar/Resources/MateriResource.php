@@ -20,26 +20,28 @@ use Filament\Tables\Table;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\SoftDeletingScope;
 use Illuminate\Support\Str;
+use Illuminate\Support\Facades\Auth;
 
 class MateriResource extends Resource
 {
     protected static ?string $model = Materi::class;
+    protected static ?string $navigationGroup = "Modul";
+
     public static function getNavigationBadge(): ?string
+
 {
     return static::getModel()::count();
 }
 
-    protected static ?string $navigationGroup = "Belajar";
-    protected static ?string $navigationIcon = 'heroicon-o-clipboard-document-check';
 
     public static function form(Form $form): Form
     {
+        $userId = Auth::id();
         return $form
         ->schema([
             Select::make('materiMapel')->label('Mata Pelajaran')
             ->relationship('materiMapel', 'title')
             ->columnSpanFull()
-            ->multiple()
             ->required(),
             TextInput::make('title')
             ->live()
@@ -60,11 +62,14 @@ class MateriResource extends Resource
             RichEditor::make('body')
             ->required()
             ->columnSpanFull()
-            ->fileAttachmentsDirectory('materi/file'),
+            ,
             Select::make('user_id')->label('Pengajar')
             ->relationship('author', 'name')
-            ->required(),
+            ->required()
+            ->default($userId),
             DateTimePicker::make('published_at')
+            ->default(now())
+            ->required()
         ]);
     }
 
