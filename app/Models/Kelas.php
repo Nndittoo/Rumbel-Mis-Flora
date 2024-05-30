@@ -12,4 +12,8 @@ class Kelas extends Model
     protected $fillable = [
         'kelas',
     ];
+
+    public function kelasSiswa(){
+        return $this->belongsToMany(Siswa::class, 'kelas_id');
+    }
 }

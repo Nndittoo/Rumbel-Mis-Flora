@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Mapel;
 use App\Models\Materi;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class HomeController extends Controller
 {
@@ -13,9 +14,16 @@ class HomeController extends Controller
      */
     public function __invoke(Request $request)
     {
-        return view('siswa.index', [
-            'mapel' => Mapel::all(),
-        ]);
+        if(Auth::user()->role == 'ADMIN'){
+            return redirect()->route('filament.admin.pages.dashboard');
+        }
+        else if(Auth::user()->role == 'ORTU'){
+            return redirect()->route('ortu');
+        }
+        else
+            return view('siswa.index', [
+                'mapel' => Mapel::all(),
+            ]);
     }
 
     public function show(Mapel $mapel){

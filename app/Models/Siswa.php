@@ -33,7 +33,7 @@ class Siswa extends Model
     }
 
     public function siswaKelas(){
-        return $this->belongsTo(Kelas::class, 'siswa_nilai', 'siswa_id', 'nilai_id');
+        return $this->belongsTo(Kelas::class, 'user_id',);
     }
     public function siswaNilai(){
         return $this->belongsToMany(Nilai::class);
@@ -47,7 +47,7 @@ class Siswa extends Model
     }
 
     public function siswaUang(){
-        return $this->belongsToMany(Uang::class);
+        return $this->hasMany(Uang::class);
     }
 
     public static function store(array $data)

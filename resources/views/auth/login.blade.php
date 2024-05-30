@@ -4,32 +4,23 @@
             <x-authentication-card-logo />
         </x-slot>
 
+        <!-- Validation Errors -->
         <x-validation-errors class="mb-4" />
-
-        @session('status')
-            <div class="mb-4 font-medium text-sm text-green-600">
-                {{ $value }}
-            </div>
-        @endsession
 
         <form method="POST" action="{{ route('login') }}">
             @csrf
-
+            <div class="flex flex-col mb-5 gap-1">
+                <h1 class="text-xl">Welcome to </h1>
+                <span class="text-4xl font-bold text-indigo-500">Rumbel Mis Flora</span>
+            </div>
             <div>
                 <x-label for="email" value="{{ __('Email') }}" />
-                <x-input id="email" class="block mt-1 w-full" type="email" name="email" :value="old('email')" required autofocus autocomplete="username" />
+                <x-input placeholder="example@gmail.com" id="email" class="block mt-1 w-full" type="email" name="email" :value="old('email')" required autofocus autocomplete="username" />
             </div>
 
             <div class="mt-4">
                 <x-label for="password" value="{{ __('Password') }}" />
                 <x-input id="password" class="block mt-1 w-full" type="password" name="password" required autocomplete="current-password" />
-            </div>
-
-            <div class="block mt-4">
-                <label for="remember_me" class="flex items-center">
-                    <x-checkbox id="remember_me" name="remember" />
-                    <span class="ms-2 text-sm text-gray-600">{{ __('Remember me') }}</span>
-                </label>
             </div>
 
             <div class="flex items-center justify-end mt-4">
@@ -45,4 +36,25 @@
             </div>
         </form>
     </x-authentication-card>
+
+    @push('scripts')
+        <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+        <script>
+            document.addEventListener('DOMContentLoaded', function () {
+                @if ($errors->any())
+                    Swal.fire({
+                        icon: 'error',
+                        title: 'Oops...',
+                        html: `
+                            <ul class="list-disc list-inside">
+                                @foreach ($errors->all() as $error)
+                                    <li>{{ $error }}</li>
+                                @endforeach
+                            </ul>
+                        `,
+                    });
+                @endif
+            });
+        </script>
+    @endpush
 </x-guest-layout>

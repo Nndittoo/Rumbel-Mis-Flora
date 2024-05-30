@@ -52,6 +52,7 @@ class AbsensiResource extends Resource
             Fieldset::make('')
                             ->schema([
                                 Select::make('siswa_id')
+                                ->label("Nama Siswa")
                                     ->options(function () {
                                         $today = now()->format('Y-m-d'); // Get today's date in 'YYYY-MM-DD' format
 
@@ -64,6 +65,7 @@ class AbsensiResource extends Resource
                                     ->required(),
                                 Select::make('attendance')
                                     ->options(Presensi::ABSENSI)
+                                    ->label("Kehadiran")
                                     ->required(),
                     ])
         ];

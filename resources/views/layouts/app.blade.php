@@ -26,7 +26,7 @@
     @livewireStyles
 </head>
 
-<body class="font-sans antialiased">
+<body class="font-sans antialiased bg-gradient-to-r from-blue-50 to-indigo-50">
     <x-banner />
 
     @include('layouts.partials.header')

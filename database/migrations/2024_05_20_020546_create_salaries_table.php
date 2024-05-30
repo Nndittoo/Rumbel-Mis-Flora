@@ -17,8 +17,8 @@ return new class extends Migration
 
             $table->decimal('gaji', 10,3);
             $table->date('tanggal')->default(now());
-            $table->string('caraBayar')->nullable();
-            $table->text('buktiBayar');
+            $table->string('caraBayar');
+            $table->text('buktiBayar')->nullable();
             $table->string('periode');
             $table->string('status')->default('belum dibayar');
             $table->timestamps();

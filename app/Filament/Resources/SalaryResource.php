@@ -33,18 +33,23 @@ class SalaryResource extends Resource
             ->schema([
                 Select::make('pengajar_id')
                     ->relationship('gajiPengajar', 'fullname')
+                    ->label('Pilih Pengajar')
                     ->required(),
                 TextInput::make('gaji')
                     ->numeric()
+                    ->label("Jumlah Gaji")
+                    ->placeholder("Masukkan Jumlah Gaji")
                     ->required(),
                 Select::make('periode')
                     ->options(Salary::BULAN)
                     ->required(),
                 Select::make('caraBayar')
                     ->options(Salary::METODE)
+                    ->label("Metode Pembayaran")
                     ->required(),
                 FileUpload::make('buktiBayar')
                     ->required()
+                    ->label("Bukti Pembayaran")
                     ->image()
                     ->directory('Gaji'),
                 Select::make('status')
@@ -56,10 +61,10 @@ class SalaryResource extends Resource
     {
         return $table
             ->columns([
-                TextColumn::make('gajiPengajar.fullname')->searchable(),
-                TextColumn::make('gaji')->sortable()->label('Gaji'),
-                TextColumn::make('caraBayar')->sortable()->searchable(),
-                ImageColumn::make('buktiBayar'),
+                TextColumn::make('gajiPengajar.fullname')->searchable()->label("Nama Pengajar"),
+                TextColumn::make('gaji')->sortable()->label('Total Gaji'),
+                TextColumn::make('caraBayar')->sortable()->label("Cara Pembayaran")->searchable(),
+                ImageColumn::make('buktiBayar')->label("Bukti Pembayaran"),
                 TextColumn::make('status')->sortable(),
             ])
             ->filters([

@@ -38,20 +38,24 @@ class NilaiResource extends Resource
                Card::make()
                 ->schema([
                     Select::make('siswa_id')
+                    ->label("Nama Siswa")
                     ->relationship('nilaiSiswa', 'full_name')
                     ->required()
                     ->columnSpan(2),
                     TextInput::make('nilai')
                     ->numeric()
                     ->required()
+                    ->placeholder("Masukkan Nilai Siswa . .")
                     ->rules(['min:0', 'max:100']),
                 Select::make('materi_id')
                     ->relationship('nilaiMateri', 'title')
+                    ->label("Pilih Nilai Untuk Sub Modul")
                     ->required()
                     ->columnSpan(2),
                 DatePicker::make('tanggal')->default(now()),
                 TextInput::make('catatan')
                     ->required()
+                    ->placeholder("Good Job !!")
                     ->columnSpan(3),
                 ])->columns(3)
             ]);

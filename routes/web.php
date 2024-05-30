@@ -3,6 +3,7 @@
 use App\Http\Controllers\DiscussionController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\MateriController;
+use App\Http\Controllers\OrtuController;
 use App\Http\Controllers\TugasController;
 use Illuminate\Support\Facades\Route;
 
@@ -17,6 +18,12 @@ Route::middleware(['auth'])->group(function () {
     Route::get('/tugas/{tugas}/edit', [TugasController::class, 'edit'])->name('tugas.edit');
     Route::put('/tugas/{tugas}', [TugasController::class, 'update'])->name('tugas.update');
 
-    Route::get('/materi', [MateriController::class, 'index'])->name('materi');
+    Route::get('/materi',  [MateriController::class, 'index'])->name('materi');
     Route::get('/{materi:slug}', [MateriController::class, 'show'])->name('materi-show');
+
+    Route::get('/ortu/ortu', [OrtuController::class, 'index'])->name('ortu');
+
+    Route::get('/pengajar', function(){
+        return view('');
+    });
 });

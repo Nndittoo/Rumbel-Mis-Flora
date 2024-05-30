@@ -35,6 +35,10 @@ public function ortuSiswa(){
     return $this->belongsToMany(Siswa::class);
 }
 
+public function siswas(){
+    return $this->belongsToMany(Siswa::class, 'ortu_siswa', 'ortu_id', 'siswa_id');
+}
+
 public function scopeOrtuRole(Builder $query)
 {
     return $query->whereHas('role', function ($query) {

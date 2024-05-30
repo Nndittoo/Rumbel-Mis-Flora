@@ -23,6 +23,7 @@ class OrtuResource extends Resource
     protected static ?string $model = Ortu::class;
     protected static ?string $navigationGroup = "Users";
     protected static ?string $navigationLabel = "Orang Tua";
+
     protected static ?int $groupSort = 1;
     protected static ?string $navigationIcon = 'heroicon-o-users';
 
@@ -45,43 +46,53 @@ class OrtuResource extends Resource
                     ->schema([
                         TextInput::make('fullName')
                             ->label('Nama Lengkap')
+                            ->placeholder("Masukkan nama lengkap orang tua siswa . .")
                             ->required(),
-                        Select::make('ortuSiswa')
-                            ->required()
-                            ->relationship('ortuSiswa', 'full_name'),
+                            Select::make('status')
+                            ->options(Ortu::STAT)
+                            ->default(Ortu::AKTIF)
+                            ->required(),
                         TextInput::make('alamat')
                             ->label('Alamat')
+                            ->placeholder("Masukkan alamat orang tua siswa . .")
                             ->required(),
                         TextInput::make('noHp')
                             ->required()
                             ->tel()
+                            ->placeholder("08 . . .")
                             ->numeric(),
-                        Select::make('status')
-                            ->options(Ortu::STAT)
-                            ->required(),
+                            Select::make('ortuSiswa')
+                            ->required()
+                            ->label("Nama Anak")
+                            ->relationship('ortuSiswa', 'full_name'),
                         TextInput::make('user_id')
                             ->label('User ID')
                             ->hidden(),
-                    ]),
+                    ])->columns(2),
                 Wizard\Step::make('Akun')
                     ->schema([
                         TextInput::make('ortuUser.name')
                             ->label('Username')
+                            ->placeholder("Masukkan username orang tua")
+                            ->helperText("Masukkan username tidak boleh ada angka")
                             ->required()
                             ->maxLength(255),
                         TextInput::make('ortuUser.email')
                             ->email()
                             ->required()
+                            ->placeholder("example@gmail.com")
                             ->maxLength(255),
                         TextInput::make('ortuUser.password')
                             ->password()
                             ->required()
+                            ->placeholder("Masukkan Password baru . .")
                             ->visible()
                             ->revealable()
                             ->minLength(8),
                         TextInput::make('passwordConfirmation')
                             ->password()
                             ->revealable()
+                            ->placeholder("Masukkan password anda kembali . .")
                             ->same('ortuUser.password')
                             ->required(),
                     ]),

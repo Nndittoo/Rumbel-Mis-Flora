@@ -2,7 +2,7 @@
     <x-dropdown align="right" width="48">
         <x-slot name="trigger">
             @if (Laravel\Jetstream\Jetstream::managesProfilePhotos())
-                <button class="flex text-sm border-2 border-transparent rounded-full focus:outline-none focus:border-gray-300 transition">
+                <button class="flex text-sm border-1 shadow-md border-black rounded-full focus:outline-none focus:border-gray-300 transition">
                     <img class="h-8 w-8 rounded-full object-cover" src="{{ Auth::user()->profile_photo_url }}" alt="{{ Auth::user()->name }}" />
                 </button>
             @else
@@ -26,12 +26,22 @@
             <x-dropdown-link href="{{ route('profile.show') }}">
                 {{ __('Profile') }}
             </x-dropdown-link>
-            <x-dropdown-link href="{{ route('filament.admin.pages.dashboard') }}" :active="request()->routeIs('filament.admin.pages.dashboard')">
-                {{ __('Admin') }}
-            </x-dropdown-link>
+           @if (Auth::user()->role == "ORTU")
+            @elseif (Auth::user()->role == "PENGAJAR")
             <x-dropdown-link href="{{ route('filament.pengajar.pages.dashboard') }}" :active="request()->routeIs('filament.pengajar.pages.dashboard')">
-                {{ __('Pengajar') }}
+                {{ __('Pengajar Dashboard') }}
             </x-dropdown-link>
+            @else
+                <x-dropdown-link href="{{ route('filament.admin.pages.dashboard') }}" :active="request()->routeIs('filament.admin.pages.dashboard')">
+                    {{ __('Admin') }}
+                </x-dropdown-link>
+                <x-dropdown-link href="{{ route('filament.pengajar.pages.dashboard') }}" :active="request()->routeIs('filament.pengajar.pages.dashboard')">
+                    {{ __('Pengajar') }}
+                </x-dropdown-link>
+                <x-dropdown-link href="{{ route('ortu') }}" :active="request()->routeIs('ortu')">
+                    {{ __('Orang Tua') }}
+                </x-dropdown-link>
+           @endif
 
             @if (Laravel\Jetstream\Jetstream::hasApiFeatures())
                 <x-dropdown-link href="{{ route('api-tokens.index') }}">

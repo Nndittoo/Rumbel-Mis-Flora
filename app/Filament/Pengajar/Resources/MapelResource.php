@@ -25,6 +25,7 @@ class MapelResource extends Resource
 {
     protected static ?string $model = Mapel::class;
     protected static ?string $navigationGroup = "Modul";
+    protected static ?string $pluralLabel = "Modul";
 
     public static function getNavigationBadge(): ?string
 
@@ -40,7 +41,8 @@ class MapelResource extends Resource
         ->schema([
             TextInput::make('title')
             ->live()
-            ->label('Nama Mata Pelajaran')
+            ->label('Nama Modul')
+            ->placeholder("Masukkan nama Modul")
             ->minLength(1)
             ->required()->maxLength(150)
             ->afterStateUpdated(function (string $operation, $state, Forms\Set $set){
@@ -55,8 +57,10 @@ class MapelResource extends Resource
             TimePicker::make('kelas_akhir')->required(),
             Select::make('kelas_id')
                 ->relationship('mapelKelas', 'kelas')
+                ->label("Kelas")
                 ->required(),
             FileUpload::make('image')
+            ->label("Thumbnail")
             ->nullable()
             ->image()
             ->columnSpanFull(),
@@ -67,7 +71,7 @@ class MapelResource extends Resource
     {
         return $table
         ->columns([
-            ImageColumn::make('image'),
+            ImageColumn::make('image')->label("Thumbnail"),
             TextColumn::make('title')->label(('Nama Mata Pelajaran'))->searchable()->sortable(),
             TextColumn::make('mapelKelas.kelas')->sortable()->label('Kelas'),
             TextColumn::make('jadwal'),

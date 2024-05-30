@@ -26,6 +26,8 @@ class MateriResource extends Resource
 {
     protected static ?string $model = Materi::class;
     protected static ?string $navigationGroup = "Modul";
+    protected static ?string $navigationLabel = "Sub Modul";
+    protected static ?string $pluralLabel = "Sub Modul";
 
     public static function getNavigationBadge(): ?string
 
@@ -39,13 +41,14 @@ class MateriResource extends Resource
         $userId = Auth::id();
         return $form
         ->schema([
-            Select::make('materiMapel')->label('Mata Pelajaran')
+            Select::make('materiMapel')->label('Modul')
             ->relationship('materiMapel', 'title')
             ->columnSpanFull()
             ->required(),
             TextInput::make('title')
             ->live()
-            ->label('Nama Materi')
+            ->label('Sub Modul')
+            ->placeholder("Masukkan nama sub modul")
             ->minLength(1)
             ->required()->maxLength(150)
             ->afterStateUpdated(function (string $operation, $state, Forms\Set $set){
@@ -56,14 +59,14 @@ class MateriResource extends Resource
             }),
             TextInput::make('slug')->unique(ignoreRecord: true),
             FileUpload::make('image')
+            ->label("Thumbnail")
             ->directory('materi/image')
             ->required()
             ->columnSpanFull(),
             RichEditor::make('body')
             ->required()
-            ->columnSpanFull()
-            ,
-            Select::make('user_id')->label('Pengajar')
+            ->columnSpanFull(),
+            Select::make('user_id')->label('Nama pengajar')
             ->relationship('author', 'name')
             ->required()
             ->default($userId),
@@ -77,10 +80,10 @@ class MateriResource extends Resource
     {
         return $table
         ->columns([
-            ImageColumn::make('image'),
-            TextColumn::make('title')->searchable()->sortable()->label('Materi'),
-            TextColumn::make('materiMapel.title')->searchable()->sortable()->label('Mata Pelajaran'),
-            TextColumn::make('author.name')->searchable()->sortable()->label('Pengajar'),
+            ImageColumn::make('image')->label("Thumbnail"),
+            TextColumn::make('title')->searchable()->sortable()->label('Sub Modul'),
+            TextColumn::make('materiMapel.title')->searchable()->sortable()->label('Modul'),
+            TextColumn::make('author.name')->searchable()->sortable()->label('Nama Pengajar'),
             TextColumn::make('published_at')->date()->sortable(),
         ])
             ->filters([

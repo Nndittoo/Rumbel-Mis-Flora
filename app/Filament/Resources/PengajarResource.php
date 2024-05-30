@@ -46,19 +46,23 @@ class PengajarResource extends Resource
                     ->schema([
                         TextInput::make('fullname')
                             ->label('Nama Lengkap')
+                            ->placeholder("Masukkan nama panjang pengajar baru . .")
                             ->required(),
                         TextInput::make('tempatLahir')
                             ->label('Tempat Lahir')
+                            ->placeholder("Masukkan Tempat Lahir Pengajar Baru . .")
                             ->required(),
                         DatePicker::make('tanggalLahir')
                             ->label('Tanggal Lahir')
                             ->date(),
                         TextInput::make('alamat')
                             ->label('Alamat')
+                            ->placeholder("Masukkan Alamat Pengajar Baru . .")
                             ->required(),
                         TextInput::make('noHp')
                             ->label('Nomor Telepon')
                             ->required()
+                            ->placeholder("08 . .")
                             ->tel()
                             ->numeric(),
                         Select::make('pendidikan')
@@ -78,25 +82,30 @@ class PengajarResource extends Resource
                         TextInput::make('user_id')
                             ->label('User ID')
                             ->hidden(),
-                    ]),
+                    ])->columns(2),
                     Wizard\Step::make('Akun')->icon('heroicon-m-user-plus')->completedIcon('heroicon-m-hand-thumb-up')
                     ->schema([
                         TextInput::make('pengajarUser.name')
                             ->label('Username')
+                            ->placeholder("Masukkan username orang tua")
                             ->required()
                             ->maxLength(255),
                         TextInput::make('pengajarUser.email')
                             ->email()
+                            ->unique(ignoreRecord:true)
                             ->required()
+                            ->placeholder("example@gmail.com")
                             ->maxLength(255),
                         TextInput::make('pengajarUser.password')
                             ->password()
                             ->required()
+                            ->placeholder("Masukkan Password baru . .")
                             ->visible()
                             ->revealable()
                             ->minLength(8),
                         TextInput::make('passwordConfirmation')
                             ->password()
+                            ->placeholder("Masukkan password anda kembali . .")
                             ->revealable()
                             ->same('pengajarUser.password')
                             ->required(),

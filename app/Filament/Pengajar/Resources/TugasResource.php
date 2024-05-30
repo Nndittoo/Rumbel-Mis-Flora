@@ -23,6 +23,9 @@ class TugasResource extends Resource
     protected static ?string $model = Tugas::class;
     protected static ?string $navigationGroup = "Modul";
 
+    protected static ?string $pluralLabel = "Tugas";
+
+
 
     public static function form(Form $form): Form
     {
@@ -36,8 +39,8 @@ class TugasResource extends Resource
     {
         return $table
             ->columns([
-                TextColumn::make('tugasUser.name')->searchable(),
-                TextColumn::make('tugasMapel.title')->searchable(),
+                TextColumn::make('tugasUser.name')->searchable()->label("Nama Siswa"),
+                TextColumn::make('tugasMapel.title')->searchable()->label("Modul"),
                 TextColumn::make('deadline')->sortable()->date(),
                 TextColumn::make('status')->sortable(),
 
@@ -84,9 +87,11 @@ class TugasResource extends Resource
                             ->schema([
                                 Forms\Components\Textarea::make('note')
                                     ->required()
-                                    ->label('Note'),
+                                    ->label('Note Untuk Siswa')
+                                    ->placeholder("Masukkan pesan untuk siswa . ."),
                                 DatePicker::make('tanggal')->default(now()),
                                 FileUpload::make('balas')->image()
+                                ->label("Jawaban")
                                 ->directory('balasTugas/file'),
                                 Select::make('status')
                                 ->options(Tugas::JAWAB)

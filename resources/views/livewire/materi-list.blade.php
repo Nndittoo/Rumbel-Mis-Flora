@@ -1,11 +1,11 @@
 <div class=" px-3 lg:px-7 py-6">
-    <div class="flex justify-between items-center border-b border-gray-100">
-        <div>
+    <div class="flex justify-between items-center border-b border-slate-300">
+        <div class="flex items-center">
             <livewire:search-box />
         </div>
         <div id="filter-selector" class="flex items-center space-x-4 font-light ">
-            <button class="{{ $sort === 'desc' ? 'text-gray-900 border-b border-gray-700' : 'text-gray-500' }} py-4" wire:click="setSort('desc')">Latest</button>
-            <button class="{{ $sort === 'asc' ? 'text-gray-900 border-b border-gray-700' : 'text-gray-500' }} py-4" wire:click="setSort('asc')">Oldest</button>
+            <button class="{{ $sort === 'desc' ? 'text-gray-900 border-b border-gray-700' : 'text-gray-500' }} py-4" wire:click="setSort('desc')">Terbaru</button>
+            <button class="{{ $sort === 'asc' ? 'text-gray-900 border-b border-gray-700' : 'text-gray-500' }} py-4" wire:click="setSort('asc')">Terlama</button>
             @if($this->activeMapel)
             <div class="flex gap-3 items-center">
             <x-badge wire:navigate href="{{ route('materi', ['mapel' => $this->activeMapel->slug]) }}" :textColor="$this->activeMapel->text_color" :bgColor="$this->activeMapel->bg_color">

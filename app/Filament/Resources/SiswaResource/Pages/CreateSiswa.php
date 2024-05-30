@@ -36,11 +36,8 @@ class CreateSiswa extends CreateRecord
         'role' => 'SISWA'
     ]);
 
-    // Tambahkan user_id ke data pengajar
-    $data['user_id'] = $user->id;
 
-    // Hapus data siswaUser dari array jika diperlukan
-    // unset($data['siswaUser']); // Tidak diperlukan jika tidak ada
+    $data['user_id'] = $user->id;
 
     return $data;
 }

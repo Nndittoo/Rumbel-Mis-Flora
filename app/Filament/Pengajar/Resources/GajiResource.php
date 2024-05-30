@@ -26,7 +26,7 @@ class GajiResource extends Resource
 {
     protected static ?string $model = Salary::class;
 
-    protected static ?string $navigationLabel = 'Gaji Ku';
+    protected static ?string $navigationLabel = 'Gaji';
 
     public static function form(Form $form): Form
     {
@@ -42,12 +42,12 @@ class GajiResource extends Resource
 
         return $table
             ->columns([
-                TextColumn::make('gajiPengajar.fullname')->searchable(),
+                TextColumn::make('gajiPengajar.fullname')->searchable()->label("Nama Lengkap Pengajar"),
                 TextColumn::make('gaji')->sortable()->label('Gaji'),
-                TextColumn::make('caraBayar')->sortable()->searchable(),
-                ImageColumn::make('buktiBayar'),
-                TextColumn::make('periode')->sortable(),
-                TextColumn::make('created_at')->sortable()->date(),
+                TextColumn::make('caraBayar')->sortable()->searchable()->label("Metode Pembayaran"),
+                ImageColumn::make('buktiBayar')->label("Bukti Bayar"),
+                TextColumn::make('periode')->sortable()->label('Periode'),
+                TextColumn::make('created_at')->sortable()->date()->label('Tanggal Bayar'),
                 TextColumn::make('status')->sortable(),
             ])
             ->filters([

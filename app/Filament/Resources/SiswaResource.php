@@ -38,6 +38,7 @@ class SiswaResource extends Resource
     );
 }
     protected static ?string $navigationIcon = 'heroicon-o-user';
+    protected static ?string $foreignKey = 'siswa_id';
 
     protected static function createFormSchema(): array
     {
@@ -46,18 +47,24 @@ class SiswaResource extends Resource
                     ->schema([
                         TextInput::make('full_name')
                             ->label('Nama Lengkap')
+                            ->placeholder("Masukkan nama lengkap siswa baru . .")
                             ->required(),
                         TextInput::make('sekolah')
                             ->label('Asal Sekolah')
+                            ->placeholder("Masukkan Asal sekolah siswa baru . .")
                             ->required(),
                         Select::make('kelas_id')
                             ->relationship('siswaKelas', 'kelas')
+                            ->label("Kelas")
+                            ->placeholder("Pilih Kelas untuk siswa baru . .")
                             ->required(),
                         TextInput::make('alamat')
                             ->label('Alamat')
+                            ->placeholder("Masukkan alamat siswa baru . .")
                             ->required(),
                         TextInput::make('tempatLahir')
                             ->label('Tempat Lahir')
+                            ->placeholder("Masukkan asal tempat lahir siswa baru . .")
                             ->required(),
                         DatePicker::make('tanggalLahir')
                             ->label('Tanggal Lahir')
@@ -65,11 +72,12 @@ class SiswaResource extends Resource
                             ->required(),
                         Select::make('status')
                             ->options(Siswa::STAT)
+                            ->default(Siswa::AKTIF)
                             ->required(),
                         TextInput::make('user_id')
                             ->label('User ID')
                             ->hidden(),
-                    ])->columnSpanFull(),
+                    ])->columns(2),
                 ];
     }
 
