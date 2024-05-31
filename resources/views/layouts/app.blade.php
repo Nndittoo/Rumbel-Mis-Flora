@@ -30,35 +30,32 @@
     <x-banner />
 
     @include('layouts.partials.header')
-    <main class="container mx-auto px-5 flex flex-grow">
-        {{ $slot }}
-    </main>
+        <main class="container mx-auto px-5 flex flex-grow">
+            {{ $slot }}
+        </main>
     @include('layouts.partials.footer')
 
     @stack('modals') @livewireScripts
-
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            const toast = document.getElementById('toast');
+            if (toast) {
+                console.log('Toast element found:', toast);
+                setTimeout(() => {
+                    toast.classList.add('fade-out');
+                    setTimeout(() => {
+                        toast.classList.add('hidden');
+                    }, 1000); // Tambahkan sedikit penundaan untuk menghindari penghapusan elemen sebelum animasi selesai
+                }, 3000); // Menyembunyikan setelah 3 detik
+            } else {
+                console.log('Toast element not found');
+            }
+        });
+    </script>
     <script src="https://unpkg.com/filepond@^4/dist/filepond.js"></script>
     <script src="https://unpkg.com/filepond-plugin-image-preview/dist/filepond-plugin-image-preview.js"></script>
     <script src="https://unpkg.com/filepond/dist/filepond.js"></script>
-    <script>
-        // Get a reference to the file input element
-        const inputElement = document.querySelector('input[type="file"]');
-        FilePond.registerPlugin(FilePondPluginImagePreview);
-
-        FilePond.setOptions({
-            server: {
-                process: '/upload',
-                fetch: null,
-                revert: null,
-                headers: {
-                    'X-CSRF-TOKEN' : '{{ csrf_token() }}'
-                }
-            },
-        });
-
-        // Create a FilePond instance
-        const pond = FilePond.create(inputElement);
-    </script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 </body>
 
 </html>

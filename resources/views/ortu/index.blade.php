@@ -1,6 +1,6 @@
 <x-app-layout>
-    <div class="h-max w-screen p-5 bg-gradient-to-r from-blue-50 to-indigo-50">
-        <div class="h-40 shadow-lg flex items-start justify-between p-5 rounded-lg bg-white transition-transform transform hover:scale-105">
+    <div class="h-max w-screen p-5">
+        <div class="h-40 shadow-lg flex items-start justify-between p-5 rounded-lg bg-white bg-opacity-50 transition-transform transform hover:scale-105">
             <p class="text-3xl flex flex-col h-full justify-center font-bold text-indigo-700"> Orang Tua dari
                 <span class="text-xl text-gray-600">
                     @foreach ($siswa as $siswa)
@@ -15,7 +15,7 @@
 
         <div class="mt-10">
             <div class="grid grid-cols-1 md:grid-cols-2 gap-10">
-                <div class="shadow-lg p-8 bg-white rounded-lg transition-transform transform hover:scale-105">
+                <div class="shadow-lg p-8 bg-white rounded-lg bg-opacity-50 transition-transform transform hover:scale-105">
                     <p class="text-xl font-semibold text-indigo-700 mb-3">Informasi Anak :</p>
                     <div class="border-t-2 p-3 border-indigo-200">
                         <p class="flex justify-between items-center">Nama Lengkap <span class="w-[60%]">: {{ $siswa->full_name }}</span></p>
@@ -24,7 +24,7 @@
                         <p class="flex justify-between items-center">Status <span class="w-[60%]">: {{ $siswa->status }}</span></p>
                     </div>
                 </div>
-                <div class="shadow-lg p-8 bg-white rounded-lg transition-transform transform hover:scale-105">
+                <div class="shadow-lg p-8 bg-white bg-opacity-50 rounded-lg transition-transform transform hover:scale-105">
                     <p class="text-xl font-semibold text-indigo-700 mb-3">Informasi Uang Les :</p>
                     @foreach ($uangLes as $uang)
                     <div class="border-t-2 p-3 border-indigo-200 gap-3">
@@ -37,8 +37,57 @@
                     @endforeach
                 </div>
             </div>
-            <div class="shadow-lg p-8 mt-10 bg-white rounded-lg transition-transform transform hover:scale-105">
-                <h1 class="text-center text-xl font-semibold text-indigo-700 border-b-2 pb-2 border-indigo-200"> Daftar Jadwal Modul </h1>
+            <div class="shadow-lg p-8 mt-10 bg-white bg-opacity-50 rounded-lg transition-transform transform hover:scale-105">
+                <h1 class="text-center text-xl font-semibold text-indigo-700 border-b-2 pb-1 border-indigo-200"> Nilai dari {{ $siswa->full_name }}</h1>
+                    <div class="flex items-center mt-3 justify-center">
+                        <div class="relative w-full shadow-md sm:rounded-lg">
+                            <table class="w-full text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400">
+                                <thead class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
+                                    <tr>
+                                        <th scope="col" class="px-6 py-3">
+                                            Nama Siswa
+                                        </th>
+                                        <th scope="col" class="px-6 py-3">
+                                            Materi
+                                        </th>
+                                        <th scope="col" class="px-6 py-3">
+                                            Nilai
+                                        </th>
+                                        <th scope="col" class="px-6 py-3">
+                                            Catatan
+                                        </th>
+                                        <th scope="col" class="px-6 py-3">
+                                            Tanggal
+                                        </th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    @foreach ($nilai as $nilai)
+                                        <tr class="odd:bg-white odd:dark:bg-gray-900 even:bg-gray-50 even:dark:bg-gray-800 border-b dark:border-gray-700">
+                                            <th scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
+                                                {{ $nilai->nilaiSiswa->full_name }}
+                                            </th>
+                                            <td class="px-6 py-4">
+                                                {{ $nilai->nilaiMateri->title }}
+                                            </td>
+                                            <td class="px-6 py-4">
+                                                {{ $nilai->nilai }}
+                                            </td>
+                                            <td class="px-6 py-4">
+                                                {{ $nilai->catatan }}
+                                            </td>
+                                            <td class="px-6 py-4">
+                                                <a href="#" class="font-medium text-blue-600 dark:text-blue-500 hover:underline">{{ date('d F Y', strtotime($nilai->tanggal)) }}</a>
+                                            </td>
+                                        </tr>
+                                    @endforeach
+                                </tbody>
+                            </table>
+                    </div>
+                </div>
+            </div>
+            <div class="shadow-lg p-8 mt-10 bg-white bg-opacity-50 rounded-lg transition-transform transform hover:scale-105">
+                <h1 class="text-center text-xl font-semibold text-indigo-700 border-b-2 pb-2 border-indigo-200"> Daftar Jadwal Mata Pelajaran </h1>
                 <div class="grid grid-cols-1 md:grid-cols-3 gap-10 p-5">
                     @foreach ($mapel as $mapel)
                         <div

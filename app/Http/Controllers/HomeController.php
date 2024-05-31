@@ -20,10 +20,15 @@ class HomeController extends Controller
         else if(Auth::user()->role == 'ORTU'){
             return redirect()->route('ortu');
         }
-        else
+        else if(Auth::user()->role == 'SISWA'){
             return view('siswa.index', [
                 'mapel' => Mapel::all(),
             ]);
+        }
+        else{
+            return redirect()->route('filament.pengajar.pages.dashboard');
+        }
+
     }
 
     public function show(Mapel $mapel){

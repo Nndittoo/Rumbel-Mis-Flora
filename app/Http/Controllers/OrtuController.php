@@ -6,6 +6,7 @@ use App\Models\Mapel;
 use App\Models\Presensi;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Carbon\Carbon;
 
 class OrtuController extends Controller
 {
@@ -14,10 +15,12 @@ class OrtuController extends Controller
     $user = Auth::user();
     $ortu= $user->userOrtu;
     $siswa= $ortu->ortuSiswa;
-
+    $nilai = $siswa->flatMap->siswaNilai;
     $uangLes = $siswa->flatMap->siswaUang;
 
     $waktu = date("d F Y");
+
+    $nilai->tanggal = date("d F Y");
 
     $absen = Presensi::all();
 
@@ -28,7 +31,8 @@ class OrtuController extends Controller
         'siswa' => $siswa,
         'absen' => $absen,
         'mapel' => $mapel,
-        'waktu' => $waktu
+        'waktu' => $waktu,
+        'nilai' => $nilai
     ]);
 
 }

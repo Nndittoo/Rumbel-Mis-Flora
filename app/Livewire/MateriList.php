@@ -33,6 +33,12 @@ class MateriList extends Component
 
     public function setSort($sort){
         $this->sort = ($sort == 'desc') ? 'desc' : 'asc';
+            if($sort == 'desc'){
+                session()->flash('sort', 'Terbaru');
+            }
+            else if($sort == 'asc'){
+                session()->flash('sort', 'Terlama');
+            }
     }
 
     #[Computed()]

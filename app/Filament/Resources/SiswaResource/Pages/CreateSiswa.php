@@ -20,7 +20,7 @@ class CreateSiswa extends CreateRecord
     $tanggalLahir = date('dmY', strtotime($data['tanggalLahir']));
 
     // Buat email dari nama lengkap
-    $email = str_replace(' ', '', strtolower($fullName)) . '@rumbelmisflora.students';
+    $email = str_replace(' ', '', strtolower($fullName)) . '@students.rms';
 
     // Ambil kata pertama dari nama lengkap sebagai 'name'
     $name = explode(' ', $fullName)[0];

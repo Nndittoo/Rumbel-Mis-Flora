@@ -27,6 +27,7 @@
                 {{ __('Profile') }}
             </x-dropdown-link>
            @if (Auth::user()->role == "ORTU")
+            @elseif(Auth::user()->role == "SISWA")
             @elseif (Auth::user()->role == "PENGAJAR")
             <x-dropdown-link href="{{ route('filament.pengajar.pages.dashboard') }}" :active="request()->routeIs('filament.pengajar.pages.dashboard')">
                 {{ __('Pengajar Dashboard') }}
@@ -35,7 +36,7 @@
                 <x-dropdown-link href="{{ route('filament.admin.pages.dashboard') }}" :active="request()->routeIs('filament.admin.pages.dashboard')">
                     {{ __('Admin') }}
                 </x-dropdown-link>
-                <x-dropdown-link href="{{ route('filament.pengajar.pages.dashboard') }}" :active="request()->routeIs('filament.pengajar.pages.dashboard')">
+                <x-dropdown-link href="{{ route('filament.pengajar.resources.mapels.index') }}" :active="request()->routeIs('filament.pengajar.pages.dashboard')">
                     {{ __('Pengajar') }}
                 </x-dropdown-link>
                 <x-dropdown-link href="{{ route('ortu') }}" :active="request()->routeIs('ortu')">

@@ -27,7 +27,7 @@
                     <x-nav-link wire:navigate href="{{ route('materi') }}" :active="request()->routeIs('materi', 'mapel.show', 'materi-show')">
                         {{ __('Materi') }}
                     </x-nav-link>
-                    <x-nav-link wire:navigate href="{{ route('tugas') }}" :active="request()->routeIs('tugas', 'tugas.show', 'tugas.store', 'tugas.create')">
+                    <x-nav-link wire:navigate href="{{ route('tugas') }}" :active="request()->routeIs('tugas', 'tugas.show', 'tugas.store', 'tugas.create', 'tugas.edit', 'tugas.update')">
                         {{ __('Tugas') }}
                     </x-nav-link>
                 </ul>

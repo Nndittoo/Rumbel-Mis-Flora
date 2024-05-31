@@ -54,9 +54,12 @@ class TugasController extends Controller
 
     public function index()
     {
+        $selesai = Tugas::where('status', 'SELESAI')->count();
+        $belumSelesai = Tugas::where('status', 'BELUM SELESAI')->count();
         return view('siswa.tugas.tugas', [
             'tugas' => Tugas::all(),
-            'mem' => 'ANjing kau ua',
+            'selesai' => $selesai,
+            'belumSelesai' => $belumSelesai,
         ]);
     }
 

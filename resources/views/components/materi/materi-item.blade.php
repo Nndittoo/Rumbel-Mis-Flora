@@ -1,4 +1,4 @@
-<article class="[&:not(:last-child)]:border-b border-gray-200 pb-10 transition-transform transform hover:scale-100 ease-in-out 300ms hover:bg-white hover:shadow-lg rounded-lg p-5">
+<article a wire:navigate href="{{ route('materi-show', $materi->slug) }}" class="mb-3 cursor-pointer [&:not(:last-child)]:border-b border-gray-200 pb-10 transition-transform transform hover:scale-100 ease-in-out 300ms hover:bg-white hover:shadow-lg rounded-lg p-5">
     <div class="article-body grid grid-cols-12 gap-5 mt-5 items-start">
         <div class="article-thumbnail col-span-4 flex items-center">
             <a wire:navigate href="{{ route('materi-show', $materi->slug) }}">

@@ -1,7 +1,21 @@
 <!-- resources/views/tugas/create.blade.php -->
 <x-app-layout>
-    <div class="container mx-auto mt-10">
-        <div class="max-w-md mx-auto bg-white p-8 rounded-lg shadow-lg transform transition hover:scale-105 duration-300">
+    <div class="container mx-auto py-10">
+        <div class="flex justify-between mb-12 items-center bg-white p-5 rounded-xl shadow-lg">
+            <div>
+                <p class="text-2xl font-semibold text-indigo-700"> Selamat datang di Halaman <span class="text-cyan-500 font-mono">Tambah dan Edit Tugas</span></p>
+                <span> Di sini kamu bisa menambahkan tugas yang diberikan dari sekolah, dan juga kamu bisa mengubah nya. </span>
+            </div>
+            <div>
+                <img src="{{ asset('img/child-world.jpg') }}" alt="" width="250px" height="250px">
+            </div>
+        </div>
+        <div class="flex mb-3 items-center bg-gradient-to-r from-cyan-500 to-blue-500 p-5 rounded-xl shadow-lg">
+            <div class="w-full">
+                <p class="text-xl text-center font-semibold text-slate-100"> Silahkan isi form di bawah 😀</p>
+            </div>
+        </div>
+        <div class="mx-auto bg-white p-8 rounded-lg shadow-lg">
             <h2 class="text-2xl font-bold mb-5 text-indigo-600">{{ isset($tugas) ? 'Edit Tugas' : 'Tambah Tugas Baru' }}</h2>
             <form action="{{ isset($tugas) ? route('tugas.update', $tugas) : route('tugas.store') }}" method="POST" enctype="multipart/form-data">
                 @csrf

@@ -67,6 +67,9 @@ class AbsensiResource extends Resource
                                     ->options(Presensi::ABSENSI)
                                     ->label("Kehadiran")
                                     ->required(),
+                                DatePicker::make('tanggal')
+                                ->default(now())
+                                ->hidden(),
                     ])
         ];
     }

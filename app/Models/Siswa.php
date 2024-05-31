@@ -36,7 +36,7 @@ class Siswa extends Model
         return $this->belongsTo(Kelas::class, 'user_id',);
     }
     public function siswaNilai(){
-        return $this->belongsToMany(Nilai::class);
+        return $this->hasMany(Nilai::class);
     }
 
     public function siswaOrtu(){

@@ -1,5 +1,25 @@
 <div class=" px-3 lg:px-7 py-6">
-    <div class="flex justify-between items-center border-b border-slate-300">
+    <div class="flex justify-between mb-12 items-center bg-white p-5 rounded-xl shadow-lg">
+        <div>
+            <p class="text-2xl font-semibold text-indigo-700"> Selamat datang di Halaman <span class="text-cyan-500 font-mono">Materi!!</span></p>
+            <span> Di Sini anda bisa melihat materi yang telah di siapkan oleh pengajar. </span>
+        </div>
+        <div>
+            <img src="{{ asset('img/child.png') }}" alt="" width="300px" height="300px">
+        </div>
+    </div>
+    @if(session()->has('sort'))
+        <div id="toast" class="flex justify-between mb-3 items-center bg-gradient-to-r from-cyan-500 to-blue-500 p-5 rounded-xl shadow-lg">
+            <div>
+                <p class="text-xl font-semibold text-indigo-700"> Kamu sedang mengurutkan materi dalam urutan
+                <span class="text-white">
+                        {{ session('sort') }}
+                </span>
+                    sekarang.</p>
+            </div>
+        </div>
+     @endif
+    <div class="flex sticky top-0 justify-between items-center border-b border-slate-300">
         <div class="flex items-center">
             <livewire:search-box />
         </div>
