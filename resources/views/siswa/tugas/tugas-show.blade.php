@@ -59,7 +59,7 @@
                 <div class="bg-gray-100 p-6 rounded-lg shadow-inner">
                     <h3 class="text-xl font-semibold mb-2 text-gray-800">Balasan dari Guru:</h3>
                     @foreach ($balasan as $pesan)
-                        <p class="text-sm text-gray-600 mb-2">"{{ $pesan->note }}"</p>
+                        <p class="text-sm text-gray-600 mb-2 mt-5">"{{ $pesan->note }}"</p>
                         @if ($pesan->balas)
                             <img src="{{ asset('storage/'. $pesan->balas) }}" alt="gambar balasan guru"
                                  class="mt-5 rounded-lg shadow-md transfrom hover:scale-105 transition duration-300">

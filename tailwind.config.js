@@ -11,7 +11,8 @@ export default {
         './resources/views/**/*.blade.php',
         './resources/views/**/*.js',
         './vendor/filament/**/*.blade.php',
-        './**/*.blade.php'
+        './**/*.blade.php',
+        './resources/views/filament/pengajar/pages/*.blade.php'
     ],
 
     theme: {

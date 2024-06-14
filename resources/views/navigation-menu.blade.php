@@ -7,11 +7,8 @@
             @elseif (Auth::user()->role == "PENGAJAR")
             <div class="top-menu ml-10">
                 <ul class="flex space-x-4">
-                    <x-nav-link wire:navigate href="{{ route('index') }}" :active="request()->routeIs('index')">
-                        {{ __('Home') }}
-                    </x-nav-link>
                     <x-nav-link wire:navigate href="{{ route('materi') }}" :active="request()->routeIs('materi', 'mapel.show', 'materi-show')">
-                        {{ __('Materi') }}
+                        {{ __('Discussion') }}
                     </x-nav-link>
                     <x-nav-link wire:navigate href="{{ route('tugas') }}" :active="request()->routeIs('tugas', 'tugas.show', 'tugas.store', 'tugas.create')">
                         {{ __('Daftar Tugas Murid') }}

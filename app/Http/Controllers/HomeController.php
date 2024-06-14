@@ -25,8 +25,8 @@ class HomeController extends Controller
                 'mapel' => Mapel::all(),
             ]);
         }
-        else{
-            return redirect()->route('filament.pengajar.pages.dashboard');
+        else if(Auth::user()->role == 'PENGAJAR'){
+            return redirect()->route('filament.pengajar.resources.gajis.index');
         }
 
     }

@@ -8,5 +8,8 @@ use Filament\View\LegacyComponents\Widget;
 class Dashboard extends Page
 {
     protected static string $view = 'filament.pengajar.pages.dashboard';
+    protected static string $isHidden;
+
+    public static bool $hasInlineLabels = true;
 
 }

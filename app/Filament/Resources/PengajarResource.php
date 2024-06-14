@@ -51,22 +51,30 @@ class PengajarResource extends Resource
                         TextInput::make('tempatLahir')
                             ->label('Tempat Lahir')
                             ->placeholder("Masukkan Tempat Lahir Pengajar Baru . .")
+                            ->helperText("Tempat lahir anda tidak boleh kosong.")
                             ->required(),
                         DatePicker::make('tanggalLahir')
+                            ->required()
                             ->label('Tanggal Lahir')
+                            ->helperText('Anda dapat menekan icon calender untuk memilih tanggal lahir anda.')
                             ->date(),
                         TextInput::make('alamat')
                             ->label('Alamat')
                             ->placeholder("Masukkan Alamat Pengajar Baru . .")
+                            ->helperText("Tempat lahir anda tidak boleh kosong.")
                             ->required(),
                         TextInput::make('noHp')
                             ->label('Nomor Telepon')
                             ->required()
                             ->placeholder("08 . .")
+                            ->helperText("No hp anda tidak boleh kurang dari 10 dan lebih dari 14.")
+                            ->minLength(10)
+                            ->maxLength(14)
                             ->tel()
                             ->numeric(),
                         Select::make('pendidikan')
                             ->label('Pendidikan Terakhir')
+                            ->helperText("Pilihlah salah satu dari option di atas.")
                             ->options([
                                 'sma' => 'SMA',
                                 'smk' => 'SMK',
@@ -78,6 +86,7 @@ class PengajarResource extends Resource
                             ->required(),
                         Select::make('status')
                             ->options(Pengajar::STAT)
+                            ->helperText("Pilihlah status pengajar baru ini dari uption di atas.")
                             ->required(),
                         TextInput::make('user_id')
                             ->label('User ID')
@@ -89,17 +98,20 @@ class PengajarResource extends Resource
                             ->label('Username')
                             ->placeholder("Masukkan username orang tua")
                             ->required()
+                            ->helperText('Pastikan username anda mudah di ingat.')
+                            ->minLength(5)
                             ->maxLength(255),
                         TextInput::make('pengajarUser.email')
                             ->email()
-                            ->unique(ignoreRecord:true)
                             ->required()
+                            ->helperText('Pastikan email anda mudah di ingat.')
                             ->placeholder("example@gmail.com")
                             ->maxLength(255),
                         TextInput::make('pengajarUser.password')
                             ->password()
                             ->required()
                             ->placeholder("Masukkan Password baru . .")
+                            ->helperText('Pastikan password anda mudah di ingat.')
                             ->visible()
                             ->revealable()
                             ->minLength(8),

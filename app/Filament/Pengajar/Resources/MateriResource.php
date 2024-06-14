@@ -61,7 +61,7 @@ class MateriResource extends Resource
             FileUpload::make('image')
             ->label("Thumbnail")
             ->directory('materi/image')
-            ->required()
+            ->image()
             ->columnSpanFull(),
             RichEditor::make('body')
             ->required()

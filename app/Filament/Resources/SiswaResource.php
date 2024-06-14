@@ -55,6 +55,7 @@ class SiswaResource extends Resource
                             ->required(),
                         Select::make('kelas_id')
                             ->relationship('siswaKelas', 'kelas')
+                            ->helperText('Pilihlah kelas siswa di option di atas')
                             ->label("Kelas")
                             ->placeholder("Pilih Kelas untuk siswa baru . .")
                             ->required(),
@@ -68,9 +69,11 @@ class SiswaResource extends Resource
                             ->required(),
                         DatePicker::make('tanggalLahir')
                             ->label('Tanggal Lahir')
+                            ->helperText('Anda bisa menekan icon calendar di atas untuk memilih tanggal lahir anda.')
                             ->date()
                             ->required(),
                         Select::make('status')
+                            ->helperText('Pilihlah status siswa di option di atas')
                             ->options(Siswa::STAT)
                             ->default(Siswa::AKTIF)
                             ->required(),

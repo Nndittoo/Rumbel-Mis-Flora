@@ -24,6 +24,6 @@ Route::middleware(['auth'])->group(function () {
     Route::get('/ortu/ortu', [OrtuController::class, 'index'])->name('ortu');
 
     Route::get('/pengajar', function(){
-        return view('');
+        return redirect('/');
     });
 });
