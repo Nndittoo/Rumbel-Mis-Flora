@@ -10,9 +10,6 @@
                     <x-nav-link wire:navigate href="{{ route('materi') }}" :active="request()->routeIs('materi', 'mapel.show', 'materi-show')">
                         {{ __('Discussion') }}
                     </x-nav-link>
-                    <x-nav-link wire:navigate href="{{ route('tugas') }}" :active="request()->routeIs('tugas', 'tugas.show', 'tugas.store', 'tugas.create')">
-                        {{ __('Daftar Tugas Murid') }}
-                    </x-nav-link>
                 </ul>
             </div>
         @else

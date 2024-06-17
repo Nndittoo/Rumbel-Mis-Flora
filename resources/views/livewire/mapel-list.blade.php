@@ -22,7 +22,7 @@
                     <div class="w-full flex justify-end">
                         <a wire:navigate href="{{ route('materi', ['mapel' => $mapel->slug]) }}"
                             class="text-slate-300 w-1/2 bg-indigo-500 text-center items-center p-2 hover:text-slate-50 hover:bg-gradient-to-r from-cyan-500 to-blue-500 transition ease-in-out 300ms cursor-pointer rounded-xl">
-                            Start Now
+                            Mulai belajar
                         </a>
                     </div>
                 </div>

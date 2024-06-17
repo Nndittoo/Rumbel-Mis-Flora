@@ -37,20 +37,33 @@
 
     @stack('modals') @livewireScripts
     <script>
-        document.addEventListener('DOMContentLoaded', function () {
-            const toast = document.getElementById('toast');
-            if (toast) {
-                console.log('Toast element found:', toast);
-                setTimeout(() => {
-                    toast.classList.add('fade-out');
-                    setTimeout(() => {
-                        toast.classList.add('hidden');
-                    }, 1000); // Tambahkan sedikit penundaan untuk menghindari penghapusan elemen sebelum animasi selesai
-                }, 3000); // Menyembunyikan setelah 3 detik
-            } else {
-                console.log('Toast element not found');
-            }
-        });
+         document.getElementById('files').addEventListener('change', function(event) {
+        const files = event.target.files;
+        const previewContainer = document.getElementById('file-preview');
+        previewContainer.innerHTML = ''; // Clear previous previews
+
+        for (const file of files) {
+            const fileReader = new FileReader();
+            fileReader.onload = function(e) {
+                const previewElement = document.createElement('div');
+                previewElement.classList.add('file-preview-element');
+
+                if (file.type.startsWith('image/')) {
+                    const img = document.createElement('img');
+                    img.src = e.target.result;
+                    img.classList.add('file-preview-image');
+                    previewElement.appendChild(img);
+                } else {
+                    const fileInfo = document.createElement('p');
+                    fileInfo.textContent = file.name;
+                    previewElement.appendChild(fileInfo);
+                }
+
+                previewContainer.appendChild(previewElement);
+            };
+            fileReader.readAsDataURL(file);
+        }
+    });
     </script>
     <script src="https://unpkg.com/filepond@^4/dist/filepond.js"></script>
     <script src="https://unpkg.com/filepond-plugin-image-preview/dist/filepond-plugin-image-preview.js"></script>

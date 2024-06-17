@@ -25,7 +25,7 @@
             <div class="mt-4">
                 <div class="">
                     <x-label for="password" value="{{ __('Password') }}" />
-                    <x-input placeholder="Anisa123" id="password" class="block mt-1 w-full rounded-md" type="password" name="password" required autocomplete="current-password" />
+                    <x-input placeholder="Siswa12092004" id="password" class="block mt-1 w-full rounded-md" type="password" name="password" required autocomplete="current-password" />
                 </div>
                 <p class="text-sm text-gray-500 pt-1">Masukkan password yang telah terdaftar di Rumbel Mis Flora.</p>
             </div>

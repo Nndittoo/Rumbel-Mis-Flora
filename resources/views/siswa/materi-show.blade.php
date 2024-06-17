@@ -1,5 +1,5 @@
 <x-app-layout>
-    <article class="col-span-4 md:col-span-3 mt-10 mx-auto py-5 w-full max-w-lg">
+    <article class="col-span-4 md:col-span-3 mx-auto py-5 w-full">
       <div class="bg-white rounded-lg shadow-md overflow-hidden">
         <!-- Image -->
         <img class="w-full h-64 object-cover" src="{{ asset("storage/".$materi->image) }}" alt="{{ $materi->title }}">

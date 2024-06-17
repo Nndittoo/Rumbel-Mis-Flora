@@ -44,10 +44,11 @@ class MateriResource extends Resource
             Select::make('materiMapel')->label('Modul')
             ->relationship('materiMapel', 'title')
             ->columnSpanFull()
+            ->helperText("Pilihlah modul yang ingin ditambakan sub modul.")
             ->required(),
             TextInput::make('title')
             ->live()
-            ->label('Sub Modul')
+            ->label('Judul sub modul')
             ->placeholder("Masukkan nama sub modul")
             ->minLength(1)
             ->required()->maxLength(150)
@@ -61,17 +62,21 @@ class MateriResource extends Resource
             FileUpload::make('image')
             ->label("Thumbnail")
             ->directory('materi/image')
+            ->helperText("Masukkan gambar untuk menjadi thumbnail bertipe jpg, png, dan jpeg.")
             ->image()
             ->columnSpanFull(),
             RichEditor::make('body')
             ->required()
+            ->helperText("Masukkan lah materi materi yang ingin anda sampaikan ke murid. Anda bisa mengupload file berbentuk audio, mp3. jpeg, png, jpg, pdf, docs, link, dan lain lain.")
             ->columnSpanFull(),
             Select::make('user_id')->label('Nama pengajar')
             ->relationship('author', 'name')
             ->required()
+            ->helperText("Pilihlah pengajar yang mengajar Submodul ini.")
             ->default($userId),
             DateTimePicker::make('published_at')
             ->default(now())
+            ->helperText("Masukkan kapan sub modul ini akan di publish.")
             ->required()
         ]);
     }

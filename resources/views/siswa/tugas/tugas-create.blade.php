@@ -3,7 +3,7 @@
     <div class="container mx-auto py-10">
         <div class="flex justify-between mb-12 items-center bg-white p-5 rounded-xl shadow-lg">
             <div>
-                <p class="text-2xl font-semibold text-indigo-700"> Selamat datang di Halaman <span class="text-cyan-500 font-mono">Tambah dan Edit Tugas</span></p>
+                <p class="text-2xl font-semibold text-indigo-700"> Selamat datang di Halaman <span class="text-cyan-500 font-mono">{{ $juduk }}</span> Tugas.</p>
                 <span> Di sini kamu bisa menambahkan tugas yang diberikan dari sekolah, dan juga kamu bisa mengubah nya. </span>
             </div>
             <div>
@@ -24,7 +24,7 @@
                 @endif
                 <div class="mb-4">
                     <label for="title" class="block text-sm font-medium text-gray-700">Title Tugas</label>
-                    <input type="text" name="title" id="title" value="{{ old('title', $tugas->title ?? '') }}"
+                    <input type="text" required placeholder="Masukkan judul tugas baru" name="title" id="title" value="{{ old('title', $tugas->title ?? '') }}"
                         class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
                         required>
                 </div>
@@ -41,6 +41,8 @@
                 <div class="mb-4">
                     <label for="description" class="block text-sm font-medium text-gray-700">Description</label>
                     <textarea name="description" id="description"
+                        
+                        placeholder="Berikan deskripsi mengenai tugas anda"
                         class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
                         required>{{ old('description', $tugas->description ?? '') }}</textarea>
                 </div>
@@ -59,30 +61,12 @@
                         file:py-2 file:px-4
                         dark:file:bg-neutral-700 dark:file:text-neutral-400" value="{{ old('file', $tugas->file_path ?? '') }}">
                 </div>
-                <div id="file-previews" class="mt-4">
-                    @if (isset($tugas) && $tugas->file_paths)
-                        @php
-                            $file_paths = json_decode($tugas->file_paths, true);
-                        @endphp
-                        @foreach ($file_paths as $file_path)
-                            <div class="file-preview mt-2 p-2 border border-gray-200 rounded-lg shadow-sm">
-                                <p class="text-sm font-medium text-gray-700">{{ basename($file_path) }}</p>
-                                @if (Str::endsWith($file_path, ['jpg', 'jpeg', 'png', 'gif']))
-                                    <img src="{{ Storage::url($file_path) }}" class="mt-2 max-w-full h-auto rounded-lg shadow-md" />
-                                @elseif (Str::endsWith($file_path, ['pdf']))
-                                    <embed src="{{ Storage::url($file_path) }}" type="application/pdf" class="mt-2 max-w-full h-auto rounded-lg shadow-md" />
-                                @else
-                                    <a href="{{ Storage::url($file_path) }}" class="text-indigo-500 hover:underline">Download File</a>
-                                @endif
-                            </div>
-                        @endforeach
-                    @endif
-                </div>
                 <div class="flex justify-end mt-6">
                     <button type="submit"
                         class="px-4 py-2 bg-gradient-to-r from-indigo-500 to-blue-500 text-white rounded-md shadow-md hover:from-indigo-600 hover:to-blue-600 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 transition ease-in-out duration-300">{{ isset($tugas) ? 'Update' : 'Simpan' }}</button>
                 </div>
             </form>
+            <div id="file-preview" class="mt-4"></div>
         </div>
     </div>
 </x-app-layout>

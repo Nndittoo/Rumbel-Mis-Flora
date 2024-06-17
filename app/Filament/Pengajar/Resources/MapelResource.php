@@ -53,16 +53,18 @@ class MapelResource extends Resource
             }),
             TextInput::make('slug')->unique(ignoreRecord: true),
             Select::make('jadwal')->required()->options(Mapel::DAY)->multiple(),
-            TimePicker::make('kelas_mulai')->required(),
-            TimePicker::make('kelas_akhir')->required(),
+            TimePicker::make('kelas_mulai')->required()->helperText("Masukkan waktu kelas dimulai."),
+            TimePicker::make('kelas_akhir')->required()->helperText("Masukkan waktu kelas berakhir."),
             Select::make('kelas_id')
                 ->relationship('mapelKelas', 'kelas')
                 ->label("Kelas")
+                ->helperText("Pilihlah kelas yang ingin ditambahkan modul baru.")
                 ->required(),
             FileUpload::make('image')
             ->label("Thumbnail")
             ->nullable()
             ->image()
+            ->helperText("Anda bisa memasukkan thumbnail modul bertipe png, jpg, jpeg.")
             ->columnSpanFull(),
         ]);
     }

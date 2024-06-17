@@ -12,8 +12,9 @@ class TugasController extends Controller
 {
     public function create()
     {
+        $juduk = "Tambah";
         $mapels = Mapel::all();
-        return view('siswa.tugas.tugas-create', compact('mapels'));
+        return view('siswa.tugas.tugas-create', compact('mapels', 'juduk'));
     }
 
     public function store(Request $request)
@@ -65,8 +66,9 @@ class TugasController extends Controller
 
     public function edit(Tugas $tugas)
     {
+        $juduk = "Edit";
         $mapels = Mapel::all();
-        return view('siswa.tugas.tugas-create', compact('tugas', 'mapels'));
+        return view('siswa.tugas.tugas-create', compact('tugas', 'mapels', 'juduk'));
     }
 
     public function update(Request $request, Tugas $tugas)

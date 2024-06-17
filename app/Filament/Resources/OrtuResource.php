@@ -48,7 +48,7 @@ class OrtuResource extends Resource
                             ->label('Nama Lengkap')
                             ->placeholder("Masukkan nama lengkap orang tua siswa . .")
                             ->required(),
-                            Select::make('status')
+                        Select::make('status')
                             ->options(Ortu::STAT)
                             ->default(Ortu::AKTIF)
                             ->required(),
@@ -60,6 +60,8 @@ class OrtuResource extends Resource
                             ->required()
                             ->tel()
                             ->placeholder("08 . . .")
+                            ->minLength(10)
+                            ->maxLength(14)
                             ->numeric(),
                             Select::make('ortuSiswa')
                             ->required()

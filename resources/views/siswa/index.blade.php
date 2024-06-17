@@ -11,7 +11,7 @@
                     <p class="font-semibold text-xl font-mono">Glad To See You!</p>
                 </div>
             </div>
-            <div class="flex items-center gap-5 bg-gradient-to-r h-48 from-blue-500 to-cyan-500 w-1/2 p-5 rounded-xl shadow-lg">
+            <div class="flex items-center gap-5 bg-gradient-to-r h-max from-blue-500 to-cyan-500 w-1/2 p-5 rounded-xl shadow-lg">
                 <div class="flex flex-col">
                     <h1 class="text-white font-mono font-semibold text-2xl"> Mau belajar apa sekarang ?</h1>
                     <a href="{{ route("materi") }}" class="flex items-center hover:bg-gradient-to-r hover:from-cyan-500 hover:to-blue-500 transition ease-in-out 300ms animate-bounce gap-5 text-white text-lg shadow bg-indigo-500 p-2 mt-3 rounded-md bg-opacity-50 justify-between"> Langsung ke materi <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-6">
